@@ -11,22 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ecommerce_products', function (Blueprint $table) {
+        Schema::create('order_products', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('description');
-            $table->integer('price');
-            $table->string('slug')->unique();
-
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade'); // Asegúrate de que esta línea esté después de la definición de 'order_id' en la tabla 'orders'
             $table->timestamps();
+    
+            $table->foreignId('product_id')->constrained('customer_order_products')->onDelete('cascade');
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('ecommerce_products');
+        Schema::dropIfExists('order_products');
     }
 };
