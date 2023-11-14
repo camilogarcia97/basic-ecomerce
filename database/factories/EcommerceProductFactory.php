@@ -16,8 +16,13 @@ class EcommerceProductFactory extends Factory
      */
     public function definition(): array
     {
+        $name = $this->faker->country();
+
         return [
-            //
+            'name' =>  $name,
+            'description' => $this->faker->words(10, true),
+            'price' => $this->faker->numberBetween(40000, 60000),
+            'slug' => $name,
         ];
     }
 }

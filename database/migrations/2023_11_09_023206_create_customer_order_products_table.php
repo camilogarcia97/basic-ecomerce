@@ -13,10 +13,9 @@ return new class extends Migration
     {
         Schema::create('customer_order_products', function (Blueprint $table) {
             $table->id();
-            $table->foreign('ecommerce_product_id')
-            ->references('ecommerce_product_id')
-            ->on('product_photos')
-            ->onDelete('cascade');
+            
+            $table->unsignedBigInteger('ecommerce_product_id');
+
             $table->string('name', 32);
             $table->string('description');
             $table->integer('price');

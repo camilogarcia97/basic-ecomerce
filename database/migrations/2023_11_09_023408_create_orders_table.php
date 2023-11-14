@@ -14,12 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('status'); // Campo de tipo STRING para el estado
-            $table->unsignedBigInteger('customer_id'); // Campo de tipo INT para el ID del cliente
-            $table->date('orderDate'); // Campo de tipo FECHA para la fecha de la orden
-
-            // Definir la clave foránea  para customer_id (relacionada con la tabla de clientes)
-            $table->foreign('customer_id')->constrained('customers'); 
+            $table->string('status');
+            $table->date('orderDate');
+    
+            // Verifica que la columna 'customer_id' exista en la tabla 'orders'
+            $table->unsignedBigInteger('customer_id'); // Asumiendo que es de tipo UNSIGNED BIGINT
+    
+            // Asegúrate de que la tabla 'customers' esté escrita correctamente
+            $table->foreign('customer_id')->references('id')->on('customers');
         });
     }
 
